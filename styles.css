@@ -10,149 +10,186 @@ body {
 }
 
 .container {
+    /* CORRECTED: Removed the incorrect max-width: 950% */
     width: 95%;
-    max-width: 950%;
-    margin: auto;
-    padding: 20px;
+    max-width: 1200px; /* Sensible maximum width for large screens */
+    margin: 10px auto; /* Center the container on larger screens */
+    padding: 10px;
 } 
 
-/* Title */
 h1 {
   text-align: center;
-  font-size: 32px;
+  font-size: 28px; /* Smaller font on mobile */
   font-weight: bold;
 }
 
 /* Navigation */
 nav {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
-.navigator  {
+.navigator, nav a {
   text-decoration: none;
-  margin: 0 15px;
+  margin: 0 8px; /* Tighter spacing on mobile */
   color: black;
   font-weight: bold;
-}
-
-nav a { 
-    text-decoration: none;
-  margin: 0 15px;
-  color: black;
-  font-weight: bold;
-
+  font-size: 0.9em;
+  display: inline-block; /* Allows spacing to work properly */
 }
 
 /* Japanese title */
 .jp-title {
   display: block;
-    margin: 10px auto;
-    max-width: 400px; 
-    height: auto;
-
+  margin: 10px auto 20px auto;
+  width: 90%; /* Fluid width */
+  max-width: 400px; 
+  height: auto;
 }
 
-/* Intro section */
+/* Intro section: STACKS VERTICALLY ON MOBILE */
 .intro-section {
   display: flex;
-  gap: 20px;
-  align-items: flex-start;
-  margin-bottom: 40px;
+  flex-direction: column; /* Stacks image on top of text on mobile */
+  gap: 15px;
+  align-items: center; /* Center items when stacked */
+  margin-bottom: 30px;
 }
 
 .poster {
-  width: 300px;
+  width: 90%; /* Image takes most of the screen width */
+  max-width: 250px; /* Prevents it from getting too big */
   border-radius: 6px;
 }
 
 .description {
   text-align: justify;
-  line-height: 1.7;
-  font-size: 1.6em;
+  line-height: 1.5;
+  font-size: 1em; /* Mobile-friendly font size */
+  padding: 0 5px;
 } 
 
 /* Characters */
 .section-title {
-  font-size: 26px;
+  font-size: 24px;
   margin-bottom: 20px;
+  text-align: center;
 }
 
+/* Character Section: STACKS VERTICALLY ON MOBILE */
 .character {
   display: flex;
+  flex-direction: column; /* Stacks image on top of info on mobile */
   align-items: center;
-  justify-content: space-between;
-  gap: 5px;
-  margin-bottom: 40px;
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
 /* Image styling */
 .character img {
- width: 700px;
-  height: 200px;
-
-}
-
-.End-logo { 
-    margin: 5px;
-}
-
-
-.char-info h3 {
-  margin-top: 0;
-  font-size: 1em;
+  /* CRITICAL CHANGE: Set width relative to its container on mobile */
+  width: 90%; 
+  max-width: 300px; /* Prevents tiny images from stretching too wide */
+  height: auto; /* IMPORTANT: Maintain aspect ratio */
+  object-fit: cover;
+  border-radius: 4px;
 }
 
 .char-info { 
-    font-size: 1.6em;
-    line-height: 1.2;
+    font-size: 1em; /* Mobile-friendly font size */
+    line-height: 1.4;
+    padding: 0 10px;
+    text-align: center;
 }
 
+.char-info h3 {
+  margin-top: 0;
+  font-size: 1.2em;
+}
 
-/* Force image to the right */
+/* Force image to the right - NO LONGER APPLIES ON MOBILE */
 .character.right {
-  flex-direction: row-reverse;
-  gap: 10px;
+  flex-direction: column; /* Overrides row-reverse for mobile */
+}
+
+.End-logo { 
+    display: block;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 300px;
+    height: auto;
 }
 
 
+/* --- Media Query for Tablet/Smaller Desktop (min-width: 600px) --- */
+@media (min-width: 600px) {
+    .container {
+        padding: 20px;
+    }
 
-/* Mobile responsive but STILL right side */
-@media (max-width: 768px) {
-  .character {
-    line-height: 1;
-    flex-direction: row;
-    gap: 10px;
-  }
+    h1 {
+        font-size: 36px;
+    }
+    
+    .intro-section {
+        flex-direction: row; /* Layout side-by-side */
+        align-items: flex-start;
+    }
+    
+    .poster {
+        width: 300px;
+        max-width: 40%;
+    }
+    
+    .description {
+        font-size: 1.1em;
+        line-height: 1.6;
+    }
 
-  .character img {
-    width: 235px;
-    height: 160px;
-  }
+    /* Characters: Layout side-by-side */
+    .character {
+        flex-direction: row; 
+        align-items: center;
+        gap: 20px;
+    }
 
-  .char-info {
-    text-align: left;
-    line-height: 15px;
-    font-size: 1em;
-  }
-  .description { 
-    font-size: 1em;
-    line-height: 1.1;
+    .character img {
+        width: 40%; /* Image takes 40% of the character container */
+        max-width: 350px;
+        height: 200px;
+    }
+    
+    .char-info { 
+        width: 60%;
+        font-size: 1.1em;
+        line-height: 1.4;
+        text-align: left;
+    }
+
+    /* Re-apply image to the right for the desired classes */
+    .character.right {
+        flex-direction: row-reverse;
+    }
 }
 
-.poster { 
-    width: 200px;
+
+/* --- Media Query for Large Desktop (min-width: 1025px) --- */
+@media (min-width: 1025px) {
+    .container {
+        padding: 30px;
+    }
+
+    h1 {
+        font-size: 48px;
+    }
+
+    .description {
+        font-size: 1.2em;
+        line-height: 1.7;
+    }
+    
+    .character img {
+        height: 250px; /* Slightly larger image on big screen */
+    }
 }
-
-.container { 
-    width: 95%;
-    max-width: fit-content;
-    margin: 5px;
-    padding: 5px;
-}
-} 
-
-
-
-
 
