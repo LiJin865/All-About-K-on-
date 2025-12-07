@@ -127,7 +127,6 @@ nav a {
 
 .hobbies {
   display: flex; 
- 
   align-items: flex-start;
   gap: 20px;
   margin-bottom: 40px;
@@ -143,17 +142,14 @@ nav a {
 
 
 .image-column img {
-
   width: 350px; 
   height: auto;
- 
   display: block; 
 }
 
 
 
 
-/* Mobile responsive but STILL right side */
 @media (max-width: 768px) {
   .character {
     line-height: 1;
@@ -203,6 +199,7 @@ nav a {
     padding: 5px;
 }
 } 
+
 
 
 
